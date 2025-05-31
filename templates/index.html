@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Online Safety Guardian</title>
+  <!-- Bootstrap CSS for responsive design -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Chart.js for data visualization -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      background: #f8f9fa;
+      padding: 40px;
+    }
+    h1, h2, h3 {
+      text-align: center;
+      color: #343a40;
+    }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .btn-primary {
+      background-color: #007bff;
+      border: none;
+    }
+    .btn-primary:hover {
+      background-color: #0056b3;
+    }
+    .table {
+      margin-top: 20px;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      color: #6c757d;
+      font-size: 0.9em;
+    }
+    .chart-container {
+      position: relative;
+      height: 300px;
+      margin: 20px 0;
+    }
+    .dashboard-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    .chart-card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      padding: 15px;
+      margin-bottom: 20px;
+      flex-basis: 48%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Online Safety Guardian</h1>
+    <form action="/" method="post" enctype="multipart/form-data" class="mt-4">
+      <div class="form-group">
+        <label for="file">Upload CSV File (optional, defaults to sample_chats.csv):</label>
+        <input type="file" name="file" id="file" class="form-control-file">
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Run Analysis</button>
+    </form>
+
+    {% if flagged_html %}
+    <h2 class="mt-5">Analysis Dashboard</h2>
+    
+    <div class="dashboard-row">
+      <!-- Risk Level Distribution Chart -->
+      <div class="chart-card">
+        <h3>Risk Level Distribution</h3>
+        <div class="chart-container">
+          <canvas id="riskChart"></canvas>
+        </div>
+      </div>
+      
+      <!-- Top Detected Patterns Chart -->
+      <div class="chart-card">
+        <h3>Top Detected Patterns</h3>
+        <div class="chart-container">
+          <canvas id="patternChart"></canvas>
+        </div>
+      </div>
+    </div>
+    
+    <div class="dashboard-row">
+      <!-- Sentiment Score Distribution Chart -->
+      <div class="chart-card">
+        <h3>Sentiment Score Distribution</h3>
+        <div class="chart-container">
+          <canvas id="sentimentChart"></canvas>
+        </div>
+      </div>
+      
+      <!-- Match Count Distribution Chart -->
+      <div class="chart-card">
+        <h3>Match Count Distribution</h3>
+        <div class="chart-container">
+          <canvas id="matchCountChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="mt-5">Flagged Messages</h2>
+    <div class="table-responsive">
+      {{ flagged_html|safe }}
+    </div>
+    
+    <script>
+      // Charts will be initialized here with data from Flask
+      document.addEventListener('DOMContentLoaded', function() {
+        // Risk level chart
+        new Chart(document.getElementById('riskChart'), {
+          type: 'doughnut',
+          data: {
+            labels: ['High Risk', 'Suspicious', 'Safe'],
+            datasets: [{
+              data: {{ risk_counts|default('[10, 15, 75]')|safe }},
+              backgroundColor: ['#dc3545', '#ffc107', '#28a745']
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false
+          }
+        });
+        
+        // Top patterns chart
+        new Chart(document.getElementById('patternChart'), {
+          type: 'bar',
+          data: {
+            labels: {{ pattern_labels|default("['Secret', 'Don\\'t tell', 'Meet alone', 'Trust me', 'Send pic']")|safe }},
+            datasets: [{
+              label: 'Occurrences',
+              data: {{ pattern_counts|default('[12, 8, 7, 5, 4]')|safe }},
+              backgroundColor: '#007bff'
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+        
+        // Sentiment chart
+        new Chart(document.getElementById('sentimentChart'), {
+          type: 'bar',
+          data: {
+            labels: ['Very Negative', 'Negative', 'Neutral', 'Positive', 'Very Positive'],
+            datasets: [{
+              label: 'Message Count',
+              data: {{ sentiment_counts|default('[3, 7, 10, 5, 2]')|safe }},
+              backgroundColor: '#6f42c1'
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+        
+        // Match count chart
+        new Chart(document.getElementById('matchCountChart'), {
+          type: 'bar',
+          data: {
+            labels: ['0', '1', '2', '3+'],
+            datasets: [{
+              label: 'Number of Messages',
+              data: {{ match_counts|default('[20, 15, 8, 5]')|safe }},
+              backgroundColor: '#fd7e14'
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+      });
+    </script>
+    {% endif %}
+    
+    <div class="footer">
+      <p>&copy; Online Safety Guardian</p>
+    </div>
+  </div>
+  <!-- Optional Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

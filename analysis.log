@@ -1,0 +1,35 @@
+2025-04-06 01:25:19,032 [INFO] Starting Online Safety Guardian Web App
+2025-04-06 01:25:19,487 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-06 01:25:19,487 [INFO] [33mPress CTRL+C to quit[0m
+2025-04-06 01:25:19,491 [INFO]  * Restarting with stat
+2025-04-06 01:25:21,601 [INFO] Starting Online Safety Guardian Web App
+2025-04-06 01:25:21,842 [WARNING]  * Debugger is active!
+2025-04-06 01:25:21,851 [INFO]  * Debugger PIN: 426-004-908
+2025-04-06 01:25:36,010 [INFO] 127.0.0.1 - - [06/Apr/2025 01:25:36] "GET / HTTP/1.1" 200 -
+2025-04-06 01:25:43,642 [INFO] No file uploaded, using default sample_chats.csv
+2025-04-06 01:25:43,698 [INFO] Processed 36 messages; 24 flagged as suspicious or high risk.
+2025-04-06 01:25:43,763 [INFO] 127.0.0.1 - - [06/Apr/2025 01:25:43] "[35m[1mPOST / HTTP/1.1[0m" 500 -
+2025-04-06 01:25:43,952 [INFO] 127.0.0.1 - - [06/Apr/2025 01:25:43] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2025-04-06 01:25:43,976 [INFO] 127.0.0.1 - - [06/Apr/2025 01:25:43] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2025-04-06 01:25:43,987 [INFO] 127.0.0.1 - - [06/Apr/2025 01:25:43] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2025-04-06 01:25:44,084 [INFO] 127.0.0.1 - - [06/Apr/2025 01:25:44] "GET /?__debugger__=yes&cmd=resource&f=console.png&s=BNjs7UjfRkNlIIlC9iDX HTTP/1.1" 200 -
+2025-04-06 01:25:44,112 [INFO] 127.0.0.1 - - [06/Apr/2025 01:25:44] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2025-04-06 01:26:03,174 [INFO] No file uploaded, using default sample_chats.csv
+2025-04-06 01:26:03,200 [INFO] Processed 36 messages; 24 flagged as suspicious or high risk.
+2025-04-06 01:26:03,227 [INFO] 127.0.0.1 - - [06/Apr/2025 01:26:03] "[35m[1mPOST / HTTP/1.1[0m" 500 -
+2025-04-06 01:26:03,256 [INFO] 127.0.0.1 - - [06/Apr/2025 01:26:03] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-04-06 01:26:03,257 [INFO] 127.0.0.1 - - [06/Apr/2025 01:26:03] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-04-06 01:26:03,274 [INFO] 127.0.0.1 - - [06/Apr/2025 01:26:03] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-04-06 01:26:03,286 [INFO] 127.0.0.1 - - [06/Apr/2025 01:26:03] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png&s=BNjs7UjfRkNlIIlC9iDX HTTP/1.1[0m" 304 -
+2025-04-06 01:26:03,331 [INFO] 127.0.0.1 - - [06/Apr/2025 01:26:03] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-04-06 01:26:15,083 [INFO] No file uploaded, using default sample_chats.csv
+2025-04-06 01:26:15,111 [INFO] Processed 36 messages; 24 flagged as suspicious or high risk.
+2025-04-06 01:26:15,136 [INFO] 127.0.0.1 - - [06/Apr/2025 01:26:15] "[35m[1mPOST / HTTP/1.1[0m" 500 -
+2025-04-06 01:26:15,173 [INFO] 127.0.0.1 - - [06/Apr/2025 01:26:15] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-04-06 01:26:15,178 [INFO] 127.0.0.1 - - [06/Apr/2025 01:26:15] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-04-06 01:26:15,189 [INFO] 127.0.0.1 - - [06/Apr/2025 01:26:15] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-04-06 01:26:15,245 [INFO] 127.0.0.1 - - [06/Apr/2025 01:26:15] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png&s=BNjs7UjfRkNlIIlC9iDX HTTP/1.1[0m" 304 -
+2025-04-06 01:26:15,281 [INFO] 127.0.0.1 - - [06/Apr/2025 01:26:15] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-04-06 01:28:01,543 [INFO]  * Detected change in 'C:\\Users\\Vukile\\OneDrive\\Documents\\TextBooks\\OnlineSafetyGuardian\\app.py', reloading
+2025-04-06 01:28:01,766 [INFO]  * Restarting with stat

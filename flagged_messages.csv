@@ -1,0 +1,25 @@
+id,message,match_count,severity,flagged
+4,"You’re so special, I won’t tell anyone",1,Suspicious,True
+5,Let’s keep this between us,1,Suspicious,True
+7,"You can trust me, I won't hurt you",1,Suspicious,True
+10,Can you send me a picture? Just for me,2,High Risk,True
+12,You're so beautiful for your age,1,Suspicious,True
+13,"Tell me more about your family, I want to know everything",1,Suspicious,True
+14,"If you tell anyone, we can’t talk anymore",1,Suspicious,True
+15,"Hey, I really like your photos, you're so mature for your age!",2,High Risk,True
+16,"Let's keep this between us, I have something to tell you.",1,Suspicious,True
+17,"I won't tell anyone, I promise.",1,Suspicious,True
+18,"We should meet alone sometime, just you and me, or I will hurt you.",1,Suspicious,True
+19,"You're so beautiful for your age, I can't believe it!",1,Suspicious,True
+20,"If you tell anyone, we can't talk anymore, okay?",1,Suspicious,True
+21,"This is our little secret, no one needs to know.",1,Suspicious,True
+22,"Hey, can you send me a picture of what you're wearing?",3,High Risk,True
+24,"Don't tell anyone, but I think you're really mature for your age.",2,High Risk,True
+25,"Let's just keep this between us, okay?",1,Suspicious,True
+26,"Trust me, I can keep secrets. No one will know.",2,High Risk,True
+28,"You can tell me anything, I won’t tell a soul.",1,Suspicious,True
+30,"I want to meet you in person, just the two of us.",1,Suspicious,True
+31,"It won't hurt, just trust me.",2,High Risk,True
+32,"We can talk without anyone knowing, it’ll be our secret.",2,High Risk,True
+36,"You're so special, I won't tell anyone.",1,Suspicious,True
+37,"I can keep secrets, just between us.",4,High Risk,True
