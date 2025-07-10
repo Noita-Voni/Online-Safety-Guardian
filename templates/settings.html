@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0">
+  <title>Settings - ThreatSense Analytics</title>
+  <!-- Bootstrap CSS for responsive design -->
+   <!-- Dwa -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- External CSS file -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <!-- Premium Navigation Header -->
+  <!-- Dwa -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="/" class="navbar-brand">
+        <img src="{{ url_for('static', filename='images/TSA.webp') }}" alt="ThreatSense Analytics Logo" class="navbar-logo">
+        ThreatSense Analytics
+      </a>
+      
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a href="/#analysis-tools" class="nav-link">
+            <i class="fas fa-search"></i>
+            Analysis
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/#mission" class="nav-link">
+            <i class="fas fa-info-circle"></i>
+            About
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/settings" class="nav-link active">
+            <i class="fas fa-cog"></i>
+            Settings
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/admin/audit-logs" class="nav-link" target="_blank">
+            <i class="fas fa-file-text"></i>
+            Audit Logs
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/admin/session-info" class="nav-link" target="_blank">
+            <i class="fas fa-users"></i>
+            Sessions
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/admin/dashboard" class="nav-link admin-link" target="_blank">
+            <i class="fas fa-tachometer-alt"></i>
+            Admin Panel
+          </a>
+        </li>
+      </ul>
+      
+      <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <div class="container">
+    <!-- Settings Header -->
+    <div class="settings-header">
+      <h1><i class="fas fa-cog"></i> ThreatSense Configuration</h1>
+      <p class="settings-subtitle">Customize your threat detection and analysis preferences</p>
+    </div>
+
+    <!-- Settings Tabs -->
+    <div class="settings-page-container">
+      <div class="settings-tabs-nav">
+        <button class="settings-tab-btn active" onclick="showTab('detection')">
+          <i class="fas fa-shield-alt"></i>
+          Detection Settings
+        </button>
+        <button class="settings-tab-btn" onclick="showTab('analysis')">
+          <i class="fas fa-brain"></i>
+          Analysis Preferences
+        </button>
+        <button class="settings-tab-btn" onclick="showTab('interface')">
+          <i class="fas fa-desktop"></i>
+          Interface Options
+        </button>
+        <button class="settings-tab-btn" onclick="showTab('alerts')">
+          <i class="fas fa-bell"></i>
+          Alert Settings
+        </button>
+      </div>
+
+      <!-- Detection Settings Tab -->
+      <div id="detection" class="settings-tab-content active">
+        <div class="settings-section">
+          <h3><i class="fas fa-sliders-h"></i> Threat Detection Configuration</h3>
+          
+          <form id="detectionForm" class="settings-form">
+            <div class="settings-row">
+              <div class="settings-group">
+                <label class="settings-label">Detection Sensitivity</label>
+                <input type="range" id="sensitivity" min="25" max="100" value="75" class="settings-slider">
+                <div class="slider-display">
+                  <span class="slider-value">75</span>%
+                </div>
+                <div class="settings-help">Controls how sensitive the threat detection algorithms are</div>
+              </div>
+
+              <div class="settings-group">
+                <label class="settings-label">Real-time Analysis</label>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="realTimeAnalysis" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+                <div class="settings-help">Enable real-time message analysis</div>
+              </div>
+            </div>
+
+            <div class="settings-row">
+              <div class="settings-group">
+                <label class="settings-label">Auto-flag Threats</label>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="autoFlag" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+                <div class="settings-help">Automatically flag detected threats</div>
+              </div>
+
+              <div class="settings-group">
+                <label class="settings-label">High Risk Threshold</label>
+                <input type="range" id="highRiskThreshold" min="50" max="90" value="70" class="settings-slider">
+                <div class="slider-display">
+                  <span class="slider-value">70</span>
+                </div>
+                <div class="settings-help">Minimum score to classify as high risk</div>
+              </div>
+            </div>
+
+            <div class="settings-group full-width">
+              <label class="settings-label">Active Threat Categories</label>
+              <div class="threat-categories-grid">
+                <label class="category-checkbox">
+                  <input type="checkbox" id="enableGrooming" checked>
+                  <span class="checkmark"></span>
+                  <div class="category-info">
+                    <div class="category-name">Grooming Detection</div>
+                    <div class="category-desc">Identify predatory behavior patterns</div>
+                  </div>
+                </label>
+                <label class="category-checkbox">
+                  <input type="checkbox" id="enableIsolation" checked>
+                  <span class="checkmark"></span>
+                  <div class="category-info">
+                    <div class="category-name">Isolation Tactics</div>
+                    <div class="category-desc">Detect attempts to isolate victims</div>
+                  </div>
+                </label>
+                <label class="category-checkbox">
+                  <input type="checkbox" id="enableCoercion" checked>
+                  <span class="checkmark"></span>
+                  <div class="category-info">
+                    <div class="category-name">Coercion & Threats</div>
+                    <div class="category-desc">Identify intimidation and threats</div>
+                  </div>
+                </label>
+                <label class="category-checkbox">
+                  <input type="checkbox" id="enableInappropriate" checked>
+                  <span class="checkmark"></span>
+                  <div class="category-info">
+                    <div class="category-name">Inappropriate Requests</div>
+                    <div class="category-desc">Flag inappropriate content requests</div>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div class="settings-group full-width">
+              <label class="settings-label">Custom Detection Patterns</label>
+              <textarea id="customPatterns" class="settings-textarea" rows="4" placeholder="Enter custom detection patterns (one per line)&#10;Example: suspicious phrase&#10;another pattern"></textarea>
+              <div class="settings-help">Add custom patterns for threat detection. Each pattern should be on a new line.</div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Analysis Settings Tab -->
+      <div id="analysis" class="settings-tab-content">
+        <div class="settings-section">
+          <h3><i class="fas fa-chart-line"></i> Analysis Configuration</h3>
+          
+          <form id="analysisForm" class="settings-form">
+            <div class="settings-row">
+              <div class="settings-group">
+                <label class="settings-label">Sentiment Analysis</label>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="sentimentAnalysis" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+                <div class="settings-help">Enable sentiment analysis for threat detection</div>
+              </div>
+
+              <div class="settings-group">
+                <label class="settings-label">Pattern Matching</label>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="patternMatching" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+                <div class="settings-help">Use advanced pattern matching algorithms</div>
+              </div>
+            </div>
+
+            <div class="settings-row">
+              <div class="settings-group">
+                <label class="settings-label">Risk Scoring</label>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="riskScoring" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+                <div class="settings-help">Calculate and display comprehensive risk scores</div>
+              </div>
+
+              <div class="settings-group">
+                <label class="settings-label">Detailed Reports</label>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="detailedReports" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+                <div class="settings-help">Generate detailed analysis reports</div>
+              </div>
+            </div>
+
+            <div class="settings-row">
+              <div class="settings-group">
+                <label class="settings-label">Batch Processing Size</label>
+                <input type="number" id="batchSize" min="50" max="500" value="100" class="settings-input">
+                <div class="settings-help">Number of messages to process simultaneously</div>
+              </div>
+
+              <div class="settings-group">
+                <label class="settings-label">Processing Delay (ms)</label>
+                <input type="range" id="processingDelay" min="100" max="2000" value="500" class="settings-slider">
+                <div class="slider-display">
+                  <span class="slider-value">500</span>ms
+                </div>
+                <div class="settings-help">Delay between processing batches</div>
+              </div>
+            </div>
+
+            <div class="settings-group full-width">
+              <label class="settings-label">Language Priority</label>
+              <select id="languagePriority" class="settings-select">
+                <option value="all" selected>All 11 SA Languages</option>
+                <option value="english">English Primary</option>
+                <option value="afrikaans">Afrikaans Primary</option>
+                <option value="zulu">isiZulu Primary</option>
+                <option value="xhosa">isiXhosa Primary</option>
+                <option value="sotho">Sesotho Primary</option>
+              </select>
+              <div class="settings-help">Choose primary language for analysis optimization</div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Interface Settings Tab -->
+      <!-- Dwa -->
+      <div id="interface" class="settings-tab-content">
+        <div class="settings-section">
+          <h3><i class="fas fa-palette"></i> Interface Preferences</h3>
+          
+          <form id="interfaceForm" class="settings-form">
+            <div class="settings-row">
+              <div class="settings-group">
+                <label class="settings-label">Dark Mode</label>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="darkMode" checked disabled>
+                  <span class="toggle-slider"></span>
+                </label>
+                <div class="settings-help">Dark theme is permanently enabled in this version</div>
+              </div>
+
+              <div class="settings-group">
+                <label class="settings-label">Animations</label>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="animations" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+                <div class="settings-help">Enable UI animations and transitions</div>
+              </div>
+            </div>
+
+            <div class="settings-row">
+              <div class="settings-group">
+                <label class="settings-label">Compact View</label>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="compactView">
+                  <span class="toggle-slider"></span>
+                </label>
+                <div class="settings-help">Use compact layout for better space usage</div>
+              </div>
+
+              <div class="settings-group">
+                <label class="settings-label">Auto Refresh</label>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="autoRefresh">
+                  <span class="toggle-slider"></span>
+                </label>
+                <div class="settings-help">Automatically refresh analysis results</div>
+              </div>
+            </div>
+
+            <div class="settings-group full-width">
+              <label class="settings-label">Dashboard View</label>
+              <select id="dashboardView" class="settings-select">
+                <option value="overview" selected>Overview Dashboard</option>
+                <option value="detailed">Detailed Analysis</option>
+                <option value="charts">Charts Focus</option>
+                <option value="compact">Compact Summary</option>
+              </select>
+              <div class="settings-help">Choose your preferred dashboard layout</div>
+            </div>
+
+            <div class="settings-group full-width">
+              <label class="settings-label">Risk Level Colors</label>
+              <div class="color-scheme-options">
+                <label class="color-scheme-option">
+                  <input type="radio" name="colorScheme" value="default" checked>
+                  <div class="color-preview">
+                    <span style="background:#dc3545"></span>
+                    <span style="background:#ffc107"></span>
+                    <span style="background:#28a745"></span>
+                  </div>
+                  <span>Default</span>
+                </label>
+                <label class="color-scheme-option">
+                  <input type="radio" name="colorScheme" value="accessibility">
+                  <div class="color-preview">
+                    <span style="background:#d32f2f"></span>
+                    <span style="background:#f57c00"></span>
+                    <span style="background:#388e3c"></span>
+                  </div>
+                  <span>High Contrast</span>
+                </label>
+                <label class="color-scheme-option">
+                  <input type="radio" name="colorScheme" value="colorblind">
+                  <div class="color-preview">
+                    <span style="background:#e74c3c"></span>
+                    <span style="background:#f39c12"></span>
+                    <span style="background:#2ecc71"></span>
+                  </div>
+                  <span>Colorblind Friendly</span>
+                </label>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Alert Settings Tab -->
+      <div id="alerts" class="settings-tab-content">
+        <div class="settings-section">
+          <h3><i class="fas fa-bell"></i> Alert & Notification Settings</h3>
+          
+          <form id="alertsForm" class="settings-form">
+            <div class="settings-row">
+              <div class="settings-group">
+                <label class="settings-label">Browser Notifications</label>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="browserNotifications" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+                <div class="settings-help">Show browser notifications for threats</div>
+              </div>
+
+              <div class="settings-group">
+                <label class="settings-label">Sound Alerts</label>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="soundAlerts" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+                <div class="settings-help">Play sound when threats are detected</div>
+              </div>
+            </div>
+
+            <div class="settings-row">
+              <div class="settings-group">
+                <label class="settings-label">Email Notifications</label>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="emailNotifications">
+                  <span class="toggle-slider"></span>
+                </label>
+                <div class="settings-help">Send email alerts for high-risk threats</div>
+              </div>
+
+              <div class="settings-group">
+                <label class="settings-label">High Risk Only</label>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="highRiskOnly">
+                  <span class="toggle-slider"></span>
+                </label>
+                <div class="settings-help">Only alert for high-risk threats</div>
+              </div>
+            </div>
+
+            <div class="settings-group full-width">
+              <label class="settings-label">Alert Threshold</label>
+              <input type="range" id="alertThreshold" min="30" max="90" value="50" class="settings-slider">
+              <div class="slider-display">
+                <span class="slider-value">50</span>
+              </div>
+              <div class="settings-help">Minimum risk score to trigger alerts</div>
+            </div>
+
+            <div class="settings-group full-width">
+              <label class="settings-label">Email Address (for notifications)</label>
+              <input type="email" id="notificationEmail" class="settings-input" placeholder="admin@yourorganization.com">
+              <div class="settings-help">Email address to receive threat notifications</div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Settings Actions -->
+      <div class="settings-actions">
+        <button class="btn-settings-save" onclick="saveAllSettings()">
+          <i class="fas fa-save"></i> Save All Settings
+        </button>
+        <button class="btn-settings-apply" onclick="applySettings()">
+          <i class="fas fa-check"></i> Apply Changes
+        </button>
+        <button class="btn-settings-reset" onclick="resetToDefaults()">
+          <i class="fas fa-undo"></i> Reset to Defaults
+        </button>
+        <a href="/" class="btn-settings-cancel">
+          <i class="fas fa-arrow-left"></i> Back to Analysis
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success/Error Messages -->
+  <div id="messageContainer"></div>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Mobile enhancements -->
+  <script src="{{ url_for('static', filename='js/mobile-enhancements.js') }}"></script>
+  
+  <script>
+    // Settings Page JavaScript
+    let currentSettings = {};
+
+    // Tab switching
+    function showTab(tabName) {
+      // Hide all tabs
+      document.querySelectorAll('.settings-tab-content').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      
+      // Remove active class from all buttons
+      document.querySelectorAll('.settings-tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      // Show selected tab
+      document.getElementById(tabName).classList.add('active');
+      
+      // Add active class to clicked button
+      event.target.classList.add('active');
+    }
+
+    // Update slider values
+    function updateSliderValue(slider) {
+      const valueDisplay = slider.nextElementSibling?.querySelector('.slider-value');
+      if (valueDisplay) {
+        valueDisplay.textContent = slider.value;
+      }
+    }
+
+    // Bind slider events
+    document.querySelectorAll('.settings-slider').forEach(slider => {
+      slider.addEventListener('input', function() {
+        updateSliderValue(this);
+      });
+    });
+
+    // Save all settings
+    function saveAllSettings() {
+      // Collect all form data
+      currentSettings = {
+        detection: {
+          sensitivity: document.getElementById('sensitivity').value,
+          realTimeAnalysis: document.getElementById('realTimeAnalysis').checked,
+          autoFlag: document.getElementById('autoFlag').checked,
+          highRiskThreshold: document.getElementById('highRiskThreshold').value,
+          enableGrooming: document.getElementById('enableGrooming').checked,
+          enableIsolation: document.getElementById('enableIsolation').checked,
+          enableCoercion: document.getElementById('enableCoercion').checked,
+          enableInappropriate: document.getElementById('enableInappropriate').checked,
+          customPatterns: document.getElementById('customPatterns').value
+        },
+        analysis: {
+          sentimentAnalysis: document.getElementById('sentimentAnalysis').checked,
+          patternMatching: document.getElementById('patternMatching').checked,
+          riskScoring: document.getElementById('riskScoring').checked,
+          detailedReports: document.getElementById('detailedReports').checked,
+          batchSize: document.getElementById('batchSize').value,
+          processingDelay: document.getElementById('processingDelay').value,
+          languagePriority: document.getElementById('languagePriority').value
+        },
+        interface: {
+          darkMode: document.getElementById('darkMode').checked,
+          animations: document.getElementById('animations').checked,
+          compactView: document.getElementById('compactView').checked,
+          autoRefresh: document.getElementById('autoRefresh').checked,
+          dashboardView: document.getElementById('dashboardView').value,
+          colorScheme: document.querySelector('input[name="colorScheme"]:checked').value
+        },
+        alerts: {
+          browserNotifications: document.getElementById('browserNotifications').checked,
+          soundAlerts: document.getElementById('soundAlerts').checked,
+          emailNotifications: document.getElementById('emailNotifications').checked,
+          highRiskOnly: document.getElementById('highRiskOnly').checked,
+          alertThreshold: document.getElementById('alertThreshold').value,
+          notificationEmail: document.getElementById('notificationEmail').value
+        }
+      };
+
+      // Save to server
+      fetch('/api/settings', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(currentSettings)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          showMessage('Settings saved successfully!', 'success');
+        } else {
+          showMessage('Error saving settings: ' + data.error, 'error');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        showMessage('Error saving settings. Please try again.', 'error');
+      });
+    }
+
+    // Apply settings
+    function applySettings() {
+      saveAllSettings();
+      showMessage('Settings applied successfully!', 'success');
+    }
+
+    // Reset to defaults
+    function resetToDefaults() {
+      if (confirm('Are you sure you want to reset all settings to defaults? This cannot be undone.')) {
+        // Reset all form fields to default values
+        document.getElementById('sensitivity').value = 75;
+        document.getElementById('realTimeAnalysis').checked = true;
+        document.getElementById('autoFlag').checked = true;
+        document.getElementById('highRiskThreshold').value = 70;
+        document.getElementById('enableGrooming').checked = true;
+        document.getElementById('enableIsolation').checked = true;
+        document.getElementById('enableCoercion').checked = true;
+        document.getElementById('enableInappropriate').checked = true;
+        document.getElementById('customPatterns').value = '';
+        
+        document.getElementById('sentimentAnalysis').checked = true;
+        document.getElementById('patternMatching').checked = true;
+        document.getElementById('riskScoring').checked = true;
+        document.getElementById('detailedReports').checked = true;
+        document.getElementById('batchSize').value = 100;
+        document.getElementById('processingDelay').value = 500;
+        document.getElementById('languagePriority').value = 'all';
+        
+        document.getElementById('animations').checked = true;
+        document.getElementById('compactView').checked = false;
+        document.getElementById('autoRefresh').checked = false;
+        document.getElementById('dashboardView').value = 'overview';
+        document.querySelector('input[name="colorScheme"][value="default"]').checked = true;
+        
+        document.getElementById('browserNotifications').checked = true;
+        document.getElementById('soundAlerts').checked = true;
+        document.getElementById('emailNotifications').checked = false;
+        document.getElementById('highRiskOnly').checked = false;
+        document.getElementById('alertThreshold').value = 50;
+        document.getElementById('notificationEmail').value = '';
+        
+        // Update slider displays
+        document.querySelectorAll('.settings-slider').forEach(updateSliderValue);
+        
+        showMessage('Settings reset to defaults.', 'info');
+      }
+    }
+
+    // Show message
+    function showMessage(message, type) {
+      const container = document.getElementById('messageContainer');
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `alert alert-${type === 'error' ? 'danger' : type === 'success' ? 'success' : 'info'}`;
+      messageDiv.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+        min-width: 300px;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      `;
+      messageDiv.innerHTML = `
+        <i class="fas fa-${type === 'error' ? 'exclamation-triangle' : type === 'success' ? 'check-circle' : 'info-circle'}"></i>
+        ${message}
+        <button type="button" class="close" onclick="this.parentElement.remove()">
+          <span>&times;</span>
+        </button>
+      `;
+      container.appendChild(messageDiv);
+      
+      // Auto remove after 5 seconds
+      setTimeout(() => {
+        if (messageDiv.parentNode) {
+          messageDiv.remove();
+        }
+      }, 5000);
+    }
+
+    // Mobile navigation toggle
+    function toggleMobileMenu() {
+      const navMenu = document.querySelector('.navbar-nav');
+      navMenu.classList.toggle('show');
+    }
+
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', function() {
+      // Update all slider displays
+      document.querySelectorAll('.settings-slider').forEach(updateSliderValue);
+      
+      // Load saved settings
+      fetch('/api/settings')
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'success' && data.settings) {
+            // Apply saved settings to form
+            console.log('Loaded settings:', data.settings);
+          }
+        })
+        .catch(error => {
+          console.log('No saved settings found, using defaults');
+        });
+    });
+  </script>
+</body>
+</html>

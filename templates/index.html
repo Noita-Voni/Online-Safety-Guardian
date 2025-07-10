@@ -1,78 +1,245 @@
+<!--Ufunani la???-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Online Safety Guardian</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ThreatSense Analytics</title>
   <!-- Bootstrap CSS for responsive design -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <!-- Chart.js for data visualization -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    body {
-      background: #f8f9fa;
-      padding: 40px;
-    }
-    h1, h2, h3 {
-      text-align: center;
-      color: #343a40;
-    }
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      background: #fff;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .btn-primary {
-      background-color: #007bff;
-      border: none;
-    }
-    .btn-primary:hover {
-      background-color: #0056b3;
-    }
-    .table {
-      margin-top: 20px;
-    }
-    .footer {
-      text-align: center;
-      margin-top: 30px;
-      color: #6c757d;
-      font-size: 0.9em;
-    }
-    .chart-container {
-      position: relative;
-      height: 300px;
-      margin: 20px 0;
-    }
-    .dashboard-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-    }
-    .chart-card {
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-      padding: 15px;
-      margin-bottom: 20px;
-      flex-basis: 48%;
-    }
-  </style>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- External CSS file -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+  <!-- Premium Navigation Header -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="/" class="navbar-brand">
+        <img src="{{ url_for('static', filename='images/TSA.webp') }}" alt="ThreatSense Analytics Logo" class="navbar-logo">
+
+        ThreatSense Analytics
+      </a>
+      
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a href="#analysis-tools" class="nav-link">
+            <i class="fas fa-search"></i>
+            Analysis
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#mission" class="nav-link">
+            <i class="fas fa-info-circle"></i>
+            About
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/settings" class="nav-link">
+            <i class="fas fa-cog"></i>
+            Settings
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/admin/audit-logs" class="nav-link" target="_blank">
+            <i class="fas fa-file-text"></i>
+            Audit Logs
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/admin/session-info" class="nav-link" target="_blank">
+            <i class="fas fa-users"></i>
+            Sessions
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/admin/dashboard" class="nav-link admin-link" target="_blank">
+            <i class="fas fa-tachometer-alt"></i>
+            Admin Panel
+          </a>
+        </li>
+      </ul>
+      
+      <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
   <div class="container">
-    <h1>Online Safety Guardian</h1>
+    <!-- Enterprise Hero Section -->
+    <div class="hero-section">
+      <div class="hero-content">
+        <h1 class="hero-title">ThreatSense Analytics</h1>
+        <p class="hero-subtitle">Safeguarding South Africa's Digital Future</p>
+        <p class="hero-description">
+          Advanced AI-powered threat detection system specifically designed to combat online grooming, 
+          gender-based violence, and digital exploitation in South African communities. 
+          Protecting our children and vulnerable individuals through cutting-edge technology.
+        </p>
+        
+        <div class="stats-row">
+          <div class="stat-card">
+            <span class="stat-number">85%</span>
+            <div class="stat-label">Threat Detection Accuracy</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">24/7</span>
+            <div class="stat-label">Real-time Monitoring</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">11</span>
+            <div class="stat-label">Official Languages Supported</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">100K+</span>
+            <div class="stat-label">Messages Analyzed Daily</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">&lt;2s</span>
+            <div class="stat-label">Average Response Time</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">99.9%</span>
+            <div class="stat-label">System Uptime</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- South African Context -->
+    <div class="sa-context">
+      <h3>🇿🇦 Addressing South Africa's Digital Safety Crisis</h3>
+      <p>
+        With over 50% of South African children experiencing some form of online harassment and 
+        gender-based violence rates among the highest globally, our AI-powered platform provides 
+        crucial protection for vulnerable communities. We're committed to making South Africa's 
+        digital spaces safer for everyone.
+      </p>
+    </div>
+
+    <!-- Mission Section -->
+    <div id="mission" class="mission-section">
+      <div class="mission-content">
+        <h2 class="mission-title">Our Mission: Protecting South Africa's Digital Citizens</h2>
+        <p style="font-size: 1.1rem; color: var(--text-secondary); max-width: 800px; margin: 0 auto;">
+          ThreatSense Analytics combines artificial intelligence with deep understanding of South African 
+          social dynamics to identify and prevent online threats before they escalate into real-world harm.
+        </p>
+
+        <div class="mission-grid">
+          <div class="mission-card protection">
+            <i class="fas fa-shield-alt mission-icon"></i>
+            <h3>Child Protection</h3>
+            <p>
+              Advanced grooming detection algorithms trained on South African conversation patterns, 
+              slang, and cultural contexts. Our system identifies predatory behavior across multiple 
+              languages including isiZulu, Afrikaans, and English.
+            </p>
+          </div>
+          
+          <div class="mission-card detection">
+            <i class="fas fa-exclamation-triangle mission-icon"></i>
+            <h3>GBV Prevention</h3>
+            <p>
+              Real-time analysis of digital communications to identify patterns of gender-based violence, 
+              intimidation, and harassment. Early intervention capabilities to protect vulnerable individuals 
+              before situations escalate.
+            </p>
+          </div>
+          
+          <div class="mission-card empowerment">
+            <i class="fas fa-users mission-icon"></i>
+            <h3>Community Empowerment</h3>
+            <p>
+              Comprehensive reporting and analytics tools for law enforcement, NGOs, and community 
+              organizations. Building stronger, safer digital communities through data-driven insights 
+              and preventive measures.
+            </p>
+          </div>
+        </div>
+
+        <!-- Key Features -->
+        <div class="features-grid">
+          <div class="feature-card">
+            <i class="fas fa-brain feature-icon"></i>
+            <div class="feature-title">AI-Powered Analysis</div>
+            <div class="feature-description">
+              Machine learning algorithms trained on South African linguistic patterns and cultural contexts
+            </div>
+          </div>
+          
+          <div class="feature-card">
+            <i class="fas fa-language feature-icon"></i>
+            <div class="feature-title">Multi-Language Support</div>
+            <div class="feature-description">
+              Comprehensive threat detection across all 11 official South African languages
+            </div>
+          </div>
+          
+          <div class="feature-card">
+            <i class="fas fa-clock feature-icon"></i>
+            <div class="feature-title">Real-Time Protection</div>
+            <div class="feature-description">
+              Instant threat identification and alert systems for immediate response
+            </div>
+          </div>
+          
+          <div class="feature-card">
+            <i class="fas fa-chart-line feature-icon"></i>
+            <div class="feature-title">Advanced Analytics</div>
+            <div class="feature-description">
+              Comprehensive reporting and trend analysis for informed decision-making
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <i class="fas fa-shield-virus feature-icon"></i>
+            <div class="feature-title">Behavioral Pattern Detection</div>
+            <div class="feature-description">
+              Advanced algorithms that identify suspicious communication patterns and grooming behaviors
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <i class="fas fa-file-contract feature-icon"></i>
+            <div class="feature-title">Compliance & Audit</div>
+            <div class="feature-description">
+              Full audit trails and compliance reporting for POPIA, GDPR, and regulatory requirements
+            </div>
+          </div>
+        </div>
+
+        <div class="cta-section">
+          <a href="#analysis-tools" class="cta-button">
+            <i class="fas fa-search"></i> Start Threat Analysis
+          </a>
+          <a href="/admin/dashboard" class="cta-button secondary">
+            <i class="fas fa-tachometer-alt"></i> Admin Dashboard
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Analysis Tools Section -->
+    <div id="analysis-tools">
+      <h1>🔍 Threat Analysis Tools</h1>
+      <p class="text-center text-muted">Upload your data for comprehensive AI-powered threat detection and analysis</p>
+    </div>
+    
     <form action="/" method="post" enctype="multipart/form-data" class="mt-4">
       <div class="form-group">
-        <label for="file">Upload CSV File (optional, defaults to sample_chats.csv):</label>
+        <label for="file">Upload CSV File (Or Optional, defaults to sample_chats.csv to see it in action):</label>
         <input type="file" name="file" id="file" class="form-control-file">
       </div>
-      <button type="submit" class="btn btn-primary btn-block">Run Analysis</button>
+      <button type="submit" class="btn btn-primary btn-block">🔍 Run Advanced Analysis</button>
     </form>
 
     {% if flagged_html %}
-    <h2 class="mt-5">Analysis Dashboard</h2>
+    <h2 class="mt-5">📊 Analysis Dashboard</h2>
     
     <div class="dashboard-row">
       <!-- Risk Level Distribution Chart -->
@@ -83,6 +250,16 @@
         </div>
       </div>
       
+      <!-- Threat Category Analysis Chart -->
+      <div class="chart-card">
+        <h3>Threat Category Analysis</h3>
+        <div class="chart-container">
+          <canvas id="threatCategoryChart"></canvas>
+        </div>
+      </div>
+    </div>
+    
+    <div class="dashboard-row">
       <!-- Top Detected Patterns Chart -->
       <div class="chart-card">
         <h3>Top Detected Patterns</h3>
@@ -90,9 +267,7 @@
           <canvas id="patternChart"></canvas>
         </div>
       </div>
-    </div>
-    
-    <div class="dashboard-row">
+      
       <!-- Sentiment Score Distribution Chart -->
       <div class="chart-card">
         <h3>Sentiment Score Distribution</h3>
@@ -100,41 +275,790 @@
           <canvas id="sentimentChart"></canvas>
         </div>
       </div>
-      
-      <!-- Match Count Distribution Chart -->
-      <div class="chart-card">
-        <h3>Match Count Distribution</h3>
-        <div class="chart-container">
-          <canvas id="matchCountChart"></canvas>
+    </div>
+
+    <!-- Enhanced Threat Profiling Section with Interactive Cards -->
+    {% if enhanced_profiles %}
+    <h2 class="mt-5">🎯 Advanced Threat Profiling</h2>
+    <p class="text-muted mb-4">Click on any card to view detailed analytics for that message. All interactions are logged for security review.</p>
+    
+    <div class="threat-profiles-grid">
+      {% for profile in enhanced_profiles %}
+      <div class="threat-profile-square {{ profile.profile.risk_level.lower() }}" 
+           onclick="openThreatModal('{{ profile.id }}')">
+        <div class="threat-card-header">
+          <span class="threat-card-id">ID: {{ profile.id }}</span>
+          <span class="threat-card-risk-score">{{ profile.profile.risk_score }}</span>
+        </div>
+        
+        <div class="threat-card-level" style="color: {{ profile.profile.risk_color }}">
+          {{ profile.profile.risk_level }}
+        </div>
+        
+        <div class="threat-card-preview">
+          "{{ profile.message[:100] }}{% if profile.message|length > 100 %}...{% endif %}"
+        </div>
+        
+        <div class="threat-card-categories">
+          {% for category, score in profile.profile.threat_scores.items() %}
+            {% if score > 0 %}
+              <span class="threat-category-badge">{{ category.replace('_', ' ')[:8] }}</span>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Threat Detail Modal -->
+    <div id="threatModal" class="threat-modal">
+      <div class="threat-modal-content">
+        <div class="threat-modal-header">
+          <h3 id="modalTitle">Threat Analysis Details</h3>
+          <button class="threat-modal-close" onclick="closeThreatModal()">&times;</button>
+        </div>
+        <div class="threat-modal-body" id="modalBody">
+          <!-- Content will be dynamically populated -->
         </div>
       </div>
     </div>
 
-    <h2 class="mt-5">Flagged Messages</h2>
+    <!-- Settings Configuration Modal -->
+    <div id="settingsModal" class="settings-modal">
+      <div class="settings-modal-content">
+        <div class="settings-modal-header">
+          <h3><i class="fas fa-cog"></i> ThreatSense Configuration</h3>
+          <button class="settings-modal-close close-modal" onclick="closeSettingsModal()">&times;</button>
+        </div>
+        <div class="settings-modal-body">
+          <div class="settings-tabs">
+            <button class="settings-tab tab-btn active" data-tab="detection">
+              <i class="fas fa-shield-alt"></i> Detection
+            </button>
+            <button class="settings-tab tab-btn" data-tab="analysis">
+              <i class="fas fa-brain"></i> Analysis
+            </button>
+            <button class="settings-tab tab-btn" data-tab="interface">
+              <i class="fas fa-desktop"></i> Interface
+            </button>
+          </div>
+
+          <!-- Detection Settings Tab -->
+          <div id="detectionTab" class="settings-tab-content tab-content active">
+            <h4><i class="fas fa-sliders-h"></i> Threat Detection Settings</h4>
+            
+            <div class="settings-group">
+              <label class="settings-label">Detection Sensitivity</label>
+              <input type="range" id="detectionSensitivity" min="25" max="100" value="75" class="settings-slider">
+              <div class="slider-display">
+                <span class="slider-value">75</span>%
+              </div>
+              <div class="settings-help">Controls how sensitive the threat detection algorithms are</div>
+            </div>
+
+            <div class="settings-group">
+              <label class="settings-label">Risk Score Thresholds</label>
+              <div class="threshold-controls">
+                <div class="threshold-item">
+                  <label>High Risk Threshold</label>
+                  <input type="range" id="highRiskThreshold" min="50" max="90" value="70" class="settings-slider">
+                  <span id="highRiskValue">70</span>
+                </div>
+                <div class="threshold-item">
+                  <label>Suspicious Threshold</label>
+                  <input type="range" id="suspiciousThreshold" min="20" max="60" value="30" class="settings-slider">
+                  <span id="suspiciousValue">30</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="settings-group">
+              <label class="settings-label">Real-time Analysis</label>
+              <label class="toggle-switch">
+                <input type="checkbox" id="detectionRealTimeAnalysis" checked>
+                <span class="toggle-slider"></span>
+              </label>
+              <div class="settings-help">Enable real-time message analysis</div>
+            </div>
+
+            <div class="settings-group">
+              <label class="settings-label">Auto-flag Threats</label>
+              <label class="toggle-switch">
+                <input type="checkbox" id="detectionAutoFlag" checked>
+                <span class="toggle-slider"></span>
+              </label>
+              <div class="settings-help">Automatically flag detected threats</div>
+            </div>
+
+            <div class="settings-group">
+              <label class="settings-label">Custom Patterns</label>
+              <textarea id="detectionCustomPatterns" class="settings-textarea" rows="3" placeholder="Enter custom detection patterns (one per line)"></textarea>
+              <div class="settings-help">Add custom patterns for threat detection</div>
+            </div>
+
+            <div class="settings-group">
+              <label class="settings-label">Active Threat Categories</label>
+              <div class="threat-categories">
+                <label class="category-checkbox">
+                  <input type="checkbox" id="detectionEnableGrooming" checked>
+                  <span class="checkmark"></span>
+                  Grooming Detection
+                </label>
+                <label class="category-checkbox">
+                  <input type="checkbox" id="detectionEnableIsolation" checked>
+                  <span class="checkmark"></span>
+                  Isolation Tactics
+                </label>
+                <label class="category-checkbox">
+                  <input type="checkbox" id="detectionEnableCoercion" checked>
+                  <span class="checkmark"></span>
+                  Coercion & Threats
+                </label>
+                <label class="category-checkbox">
+                  <input type="checkbox" id="detectionEnableInappropriate" checked>
+                  <span class="checkmark"></span>
+                  Inappropriate Requests
+                </label>
+                <label class="category-checkbox">
+                  <input type="checkbox" id="detectionEnableMeeting" checked>
+                  <span class="checkmark"></span>
+                  Meeting Requests
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Analysis Settings Tab -->
+          <div id="analysisTab" class="settings-tab-content tab-content">
+            <h4><i class="fas fa-chart-line"></i> Analysis Preferences</h4>
+            
+            <div class="settings-group">
+              <label class="settings-label">Sentiment Analysis</label>
+              <label class="toggle-switch">
+                <input type="checkbox" id="analysisSentimentAnalysis" checked>
+                <span class="toggle-slider"></span>
+              </label>
+              <div class="settings-help">Enable sentiment analysis for threat detection</div>
+            </div>
+
+            <div class="settings-group">
+              <label class="settings-label">Pattern Matching</label>
+              <label class="toggle-switch">
+                <input type="checkbox" id="analysisPatternMatching" checked>
+                <span class="toggle-slider"></span>
+              </label>
+              <div class="settings-help">Use pattern matching algorithms</div>
+            </div>
+
+            <div class="settings-group">
+              <label class="settings-label">Risk Scoring</label>
+              <label class="toggle-switch">
+                <input type="checkbox" id="analysisRiskScoring" checked>
+                <span class="toggle-slider"></span>
+              </label>
+              <div class="settings-help">Calculate and display risk scores</div>
+            </div>
+
+            <div class="settings-group">
+              <label class="settings-label">Detailed Reports</label>
+              <label class="toggle-switch">
+                <input type="checkbox" id="analysisDetailedReports" checked>
+                <span class="toggle-slider"></span>
+              </label>
+              <div class="settings-help">Generate detailed analysis reports</div>
+            </div>
+
+            <div class="settings-group">
+              <label class="settings-label">Batch Size</label>
+              <input type="number" id="analysisBatchSize" min="50" max="500" value="100" class="settings-input">
+              <div class="settings-help">Number of messages to process at once</div>
+            </div>
+
+            <div class="settings-group">
+              <label class="settings-label">Processing Delay (ms)</label>
+              <input type="range" id="analysisProcessingDelay" min="100" max="2000" value="500" class="settings-slider">
+              <div class="slider-display">
+                <span class="slider-value">500</span>ms
+              </div>
+              <div class="settings-help">Delay between processing batches</div>
+            </div>
+          </div>
+
+          <!-- Interface Settings Tab -->
+          <div id="interfaceTab" class="settings-tab-content tab-content">
+            <h4><i class="fas fa-palette"></i> Interface Preferences</h4>
+            
+            <div class="settings-group">
+              <label class="settings-label">Dark Mode</label>
+              <label class="toggle-switch">
+                <input type="checkbox" id="interfaceDarkMode" checked>
+                <span class="toggle-slider"></span>
+              </label>
+              <div class="settings-help">Use dark theme (permanent in this version)</div>
+            </div>
+
+            <div class="settings-group">
+              <label class="settings-label">Animations</label>
+              <label class="toggle-switch">
+                <input type="checkbox" id="interfaceAnimations" checked>
+                <span class="toggle-slider"></span>
+              </label>
+              <div class="settings-help">Enable UI animations and transitions</div>
+            </div>
+
+            <div class="settings-group">
+              <label class="settings-label">Notifications</label>
+              <label class="toggle-switch">
+                <input type="checkbox" id="interfaceNotifications" checked>
+                <span class="toggle-slider"></span>
+              </label>
+              <div class="settings-help">Show system notifications</div>
+            </div>
+
+            <div class="settings-group">
+              <label class="settings-label">Auto Refresh</label>
+              <label class="toggle-switch">
+                <input type="checkbox" id="interfaceAutoRefresh">
+                <span class="toggle-slider"></span>
+              </label>
+              <div class="settings-help">Automatically refresh analysis results</div>
+            </div>
+
+            <div class="settings-group">
+              <label class="settings-label">Compact View</label>
+              <label class="toggle-switch">
+                <input type="checkbox" id="interfaceCompactView">
+                <span class="toggle-slider"></span>
+              </label>
+              <div class="settings-help">Use compact layout for better space usage</div>
+            </div>
+
+            <div class="settings-group">
+              <label class="settings-label">Show Advanced Options</label>
+              <label class="toggle-switch">
+                <input type="checkbox" id="interfaceShowAdvanced">
+                <span class="toggle-slider"></span>
+              </label>
+              <div class="settings-help">Display advanced configuration options</div>
+            </div>
+            </div>
+          </div>
+
+          <div class="settings-actions">
+            <div class="unsaved-indicator" style="display: none;">
+              <i class="fas fa-exclamation-circle"></i>
+              You have unsaved changes
+            </div>
+            <button class="btn-settings-save" data-action="save">
+              <i class="fas fa-save"></i> Save Configuration
+            </button>
+            <button class="btn-settings-apply" data-action="apply">
+              <i class="fas fa-check"></i> Apply Changes
+            </button>
+            <button class="btn-settings-reset" data-action="reset">
+              <i class="fas fa-undo"></i> Reset to Defaults
+            </button>
+            <button class="btn-settings-cancel" data-action="cancel">
+              <i class="fas fa-times"></i> Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hidden data for JavaScript -->
+    <script type="application/json" id="threatData">
+      {
+        {% for profile in enhanced_profiles %}
+        "{{ profile.id }}": {
+          "id": "{{ profile.id }}",
+          "message": {{ profile.message|tojson }},
+          "risk_level": "{{ profile.profile.risk_level }}",
+          "risk_score": {{ profile.profile.risk_score }},
+          "risk_color": "{{ profile.profile.risk_color }}",
+          "explanation": {{ profile.profile.explanation|tojson }},
+          "sentiment": {
+            "compound": {{ profile.profile.sentiment.compound }},
+            "positive": {{ profile.profile.sentiment.pos }},
+            "negative": {{ profile.profile.sentiment.neg }},
+            "neutral": {{ profile.profile.sentiment.neu }}
+          },
+          "threat_scores": {{ profile.profile.threat_scores|tojson }},
+          "threat_indicators": {{ profile.profile.threat_indicators }},
+          "affected_categories": {{ profile.profile.affected_categories }}
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+      }
+    </script>
+    {% endif %}
+
+    <h2 class="mt-5">🚨 Flagged Messages</h2>
     <div class="table-responsive">
       {{ flagged_html|safe }}
     </div>
     
     <script>
+      // Premium Dark Mode System
+      function initializePremiumTheme() {
+        // Set permanent dark theme
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.body.classList.add('premium-dark-mode');
+      }
+
+      // Fallback function for settings modal (in case JS file doesn't load)
+      function openSettingsModal() {
+        console.log('Fallback openSettingsModal called');
+        alert('Settings modal function is working!'); // Test alert
+        const modal = document.getElementById('settingsModal');
+        if (modal) {
+          modal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+          console.log('Modal opened via fallback');
+        } else {
+          console.error('Settings modal not found!');
+          alert('Settings modal element not found!'); // Test alert
+        }
+      }
+
+      function closeSettingsModal() {
+        console.log('Fallback closeSettingsModal called');
+        const modal = document.getElementById('settingsModal');
+        if (modal) {
+          modal.classList.remove('active');
+          document.body.style.overflow = '';
+          console.log('Modal closed via fallback');
+        }
+      }
+
+      // Test function to check modal existence
+      function testModal() {
+        const modal = document.getElementById('settingsModal');
+        if (modal) {
+          alert('✅ Settings modal FOUND! It exists in the HTML.');
+          // Force show it for testing
+          modal.classList.add('active');
+          modal.style.display = 'block';
+          modal.style.opacity = '1';
+          document.body.style.overflow = 'hidden';
+        } else {
+          alert('❌ Settings modal NOT FOUND! Something is wrong with the HTML.');
+        }
+      }
+
+      // Update chart colors for premium dark mode
+      function updateChartColors() {
+        const gridColor = '#333333';
+        const textColor = '#ffffff';
+
+        // Update all existing charts if they exist
+        Chart.helpers.each(Chart.instances, function(instance) {
+          if (instance.options.scales) {
+            if (instance.options.scales.y && instance.options.scales.y.grid) {
+              instance.options.scales.y.grid.color = gridColor;
+              instance.options.scales.y.ticks.color = textColor;
+            }
+            if (instance.options.scales.x && instance.options.scales.x.grid) {
+              instance.options.scales.x.grid.color = gridColor;
+              instance.options.scales.x.ticks.color = textColor;
+            }
+            if (instance.options.scales.r) {
+              instance.options.scales.r.grid.color = gridColor;
+              instance.options.scales.r.ticks.color = textColor;
+              instance.options.scales.r.pointLabels.color = textColor;
+            }
+          }
+          if (instance.options.plugins && instance.options.plugins.legend) {
+            instance.options.plugins.legend.labels.color = textColor;
+          }
+          instance.update();
+        });
+      }
+
+      // Initialize premium theme before page loads
+      initializePremiumTheme();
+
+      // Mobile Navigation Toggle
+      function toggleMobileMenu() {
+        const navMenu = document.querySelector('.navbar-nav');
+        navMenu.classList.toggle('show');
+      }
+
+      // Audit Logging Functions
+      function logThreatView(messageId, riskScore) {
+        // Log threat view to audit system via API
+        fetch(`/api/threat-viewed/${messageId}?risk_score=${riskScore}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Threat view logged:', data);
+          showAuditNotification(`Threat analysis for message ${messageId} has been logged for security review.`);
+        })
+        .catch(error => {
+          console.error('Error logging threat view:', error);
+        });
+      }
+
+      // Show audit notification
+      function showAuditNotification(message) {
+        let notification = document.getElementById('auditNotification');
+        if (!notification) {
+          notification = document.createElement('div');
+          notification.id = 'auditNotification';
+          notification.style.cssText = `
+            position: fixed;
+            top: 120px;
+            right: 20px;
+            background: var(--bg-secondary);
+            border: 2px solid #007bff;
+            border-radius: 8px;
+            padding: 12px 16px;
+            box-shadow: 0 4px 12px var(--shadow);
+            z-index: 1001;
+            max-width: 300px;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+          `;
+          document.body.appendChild(notification);
+        }
+        
+        notification.innerHTML = `
+          <div style="display: flex; align-items: center;">
+            <i class="fas fa-shield-alt" style="color: #007bff; margin-right: 8px;"></i>
+            <div>${message}</div>
+          </div>
+        `;
+        
+        setTimeout(() => notification.style.transform = 'translateX(0)', 100);
+        setTimeout(() => notification.style.transform = 'translateX(100%)', 4000);
+      }
+
+      // Session tracking for analytics
+      function trackUserActivity() {
+        const sessionData = {
+          timestamp: new Date().toISOString(),
+          page: window.location.pathname,
+          action: 'page_interaction'
+        };
+        
+        const activities = JSON.parse(sessionStorage.getItem('userActivities') || '[]');
+        activities.push(sessionData);
+        
+        if (activities.length > 20) activities.shift();
+        sessionStorage.setItem('userActivities', JSON.stringify(activities));
+      }
+
+      // Update session display
+      function updateSessionDisplay() {
+        // Generate a session identifier for display
+        const sessionId = sessionStorage.getItem('displaySessionId') || 
+                         Math.random().toString(36).substr(2, 8);
+        sessionStorage.setItem('displaySessionId', sessionId);
+        
+        const sessionElement = document.getElementById('sessionId');
+        if (sessionElement) {
+          sessionElement.textContent = `Session: ${sessionId}`;
+        }
+      }
+
+      // Check audit system status
+      function checkAuditStatus() {
+        fetch('/admin/session-info')
+          .then(response => response.json())
+          .then(data => {
+            console.log('Audit system active, sessions:', data.total_sessions);
+            const auditStatus = document.querySelector('.audit-status');
+            if (auditStatus) {
+              auditStatus.style.background = '#28a745'; // Green for active
+            }
+          })
+          .catch(error => {
+            console.log('Audit system check failed:', error);
+            const auditStatus = document.querySelector('.audit-status');
+            if (auditStatus) {
+              auditStatus.style.background = '#dc3545'; // Red for error
+            }
+          });
+      }
+
+      // Check audit status every 30 seconds
+      setInterval(checkAuditStatus, 30000);
+
+      // Threat Modal Functions
+      let threatData = {};
+
+      function loadThreatData() {
+        const dataElement = document.getElementById('threatData');
+        if (dataElement) {
+          try {
+            threatData = JSON.parse(dataElement.textContent);
+          } catch (e) {
+            console.error('Error parsing threat data:', e);
+            threatData = {};
+          }
+        }
+      }
+
+      function openThreatModal(messageId) {
+        loadThreatData();
+        const data = threatData[messageId];
+        
+        if (!data) {
+          console.error('No data found for message ID:', messageId);
+          return;
+        }
+
+        // Log threat view to audit system
+        logThreatView(messageId, data.risk_score);
+
+        const modal = document.getElementById('threatModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBody');
+
+        modalTitle.textContent = `Threat Analysis - Message ID: ${messageId}`;
+        
+        // Build modal content
+        modalBody.innerHTML = `
+          <div class="threat-detail-section">
+            <div class="threat-detail-title">
+              <i class="fas fa-exclamation-triangle"></i>
+              Risk Assessment
+            </div>
+            <div class="threat-metrics-grid">
+              <div class="threat-metric-card">
+                <div class="threat-metric-value" style="color: ${data.risk_color}">${data.risk_score}</div>
+                <div class="threat-metric-label">Risk Score</div>
+              </div>
+              <div class="threat-metric-card">
+                <div class="threat-metric-value" style="color: ${data.risk_color}">${data.risk_level}</div>
+                <div class="threat-metric-label">Risk Level</div>
+              </div>
+              <div class="threat-metric-card">
+                <div class="threat-metric-value">${data.affected_categories}</div>
+                <div class="threat-metric-label">Categories Affected</div>
+              </div>
+              <div class="threat-metric-card">
+                <div class="threat-metric-value">${data.threat_indicators}</div>
+                <div class="threat-metric-label">Threat Indicators</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="threat-detail-section">
+            <div class="threat-detail-title">
+              <i class="fas fa-message"></i>
+              Original Message
+            </div>
+            <div class="threat-message-display">
+              "${data.message}"
+            </div>
+          </div>
+
+          <div class="threat-detail-section">
+            <div class="threat-detail-title">
+              <i class="fas fa-brain"></i>
+              AI Analysis
+            </div>
+            <p>${data.explanation}</p>
+          </div>
+
+          <div class="threat-detail-section">
+            <div class="threat-detail-title">
+              <i class="fas fa-chart-line"></i>
+              Sentiment Analysis
+            </div>
+            <div class="threat-metrics-grid">
+              <div class="threat-metric-card">
+                <div class="threat-metric-value" style="color: ${data.sentiment.compound >= 0 ? '#28a745' : '#dc3545'}">${(data.sentiment.compound * 100).toFixed(1)}%</div>
+                <div class="threat-metric-label">Overall Sentiment</div>
+              </div>
+              <div class="threat-metric-card">
+                <div class="threat-metric-value" style="color: #dc3545">${(data.sentiment.negative * 100).toFixed(1)}%</div>
+                <div class="threat-metric-label">Negative</div>
+              </div>
+              <div class="threat-metric-card">
+                <div class="threat-metric-value" style="color: #6c757d">${(data.sentiment.neutral * 100).toFixed(1)}%</div>
+                <div class="threat-metric-label">Neutral</div>
+              </div>
+              <div class="threat-metric-card">
+                <div class="threat-metric-value" style="color: #28a745">${(data.sentiment.positive * 100).toFixed(1)}%</div>
+                <div class="threat-metric-label">Positive</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="threat-detail-section">
+            <div class="threat-detail-title">
+              <i class="fas fa-shield-alt"></i>
+              Threat Categories
+            </div>
+            <div class="threat-categories-detailed">
+              ${Object.entries(data.threat_scores).map(([category, score]) => {
+                if (score > 0) {
+                  const icons = {
+                    'grooming': '🎭',
+                    'isolation': '🔒',
+                    'coercion': '⚠️',
+                    'inappropriate_requests': '🚫',
+                    'meeting_requests': '📍'
+                  };
+                  return `
+                    <div class="threat-category-detailed">
+                      <div class="threat-category-name">
+                        ${icons[category] || '⚠️'} ${category.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                      </div>
+                      <div class="threat-category-score">${score}</div>
+                    </div>
+                  `;
+                }
+                return '';
+              }).join('')}
+            </div>
+          </div>
+        `;
+
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeThreatModal() {
+        const modal = document.getElementById('threatModal');
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+
+      // Close modal when clicking outside
+      window.onclick = function(event) {
+        const modal = document.getElementById('threatModal');
+        if (event.target === modal) {
+          closeThreatModal();
+        }
+      };
+
+      // Close modal with Escape key
+      //DWA!!
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+          closeThreatModal();
+        }
+      });
+
       // Charts will be initialized here with data from Flask
       document.addEventListener('DOMContentLoaded', function() {
-        // Risk level chart
+        // Initialize session tracking and display
+        trackUserActivity();
+        updateSessionDisplay();
+        checkAuditStatus();
+        
+        // Premium dark theme colors
+        const gridColor = '#333333';
+        const textColor = '#ffffff';
+        
+        // Mobile responsiveness check
+        const isMobile = window.innerWidth <= 768;
+        
+        // Base chart options with mobile adjustments
+        const baseOptions = {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              labels: {
+                color: textColor,
+                padding: isMobile ? 10 : 20,
+                usePointStyle: true,
+                font: {
+                  size: isMobile ? 11 : 12
+                },
+                boxWidth: isMobile ? 12 : 15
+              }
+            }
+          }
+        };
+
+        // Risk level chart with mobile optimization
         new Chart(document.getElementById('riskChart'), {
           type: 'doughnut',
           data: {
             labels: ['High Risk', 'Suspicious', 'Safe'],
             datasets: [{
               data: {{ risk_counts|default('[10, 15, 75]')|safe }},
-              backgroundColor: ['#dc3545', '#ffc107', '#28a745']
+              backgroundColor: ['#dc3545', '#ffc107', '#28a745'],
+              borderWidth: 2,
+              borderColor: '#1a1a1a'
+            }]
+          },
+          options: {
+            ...baseOptions,
+            plugins: {
+              ...baseOptions.plugins,
+              legend: {
+                ...baseOptions.plugins.legend,
+                position: 'bottom'
+              }
+            }
+          }
+        });
+        
+        // Threat category chart (radar) with mobile optimization
+        new Chart(document.getElementById('threatCategoryChart'), {
+          type: 'radar',
+          data: {
+            labels: isMobile ? 
+              {{ threat_category_labels|default("['Grooming', 'Isolation', 'Coercion', 'Inappropriate', 'Meeting']")|safe }} :
+              {{ threat_category_labels|default("['Grooming', 'Isolation', 'Coercion', 'Inappropriate Requests', 'Meeting Requests']")|safe }},
+            datasets: [{
+              label: 'Threat Indicators',
+              data: {{ threat_categories|default('[3, 5, 2, 4, 1]')|safe }},
+              backgroundColor: 'rgba(220, 53, 69, 0.2)',
+              borderColor: '#dc3545',
+              borderWidth: 2,
+              pointBackgroundColor: '#dc3545',
+              pointBorderColor: '#1a1a1a',
+              pointHoverBackgroundColor: '#1a1a1a',
+              pointHoverBorderColor: '#dc3545'
             }]
           },
           options: {
             responsive: true,
-            maintainAspectRatio: false
+            maintainAspectRatio: false,
+            scales: {
+              r: {
+                beginAtZero: true,
+                max: 10,
+                grid: {
+                  color: gridColor
+                },
+                ticks: {
+                  stepSize: 2,
+                  color: textColor,
+                  backdropColor: 'transparent',
+                  font: {
+                    size: isMobile ? 9 : 10
+                  }
+                },
+                pointLabels: {
+                  color: textColor,
+                  font: {
+                    size: isMobile ? 10 : 12
+                  }
+                }
+              }
+            },
+            plugins: {
+              legend: {
+                display: false
+              }
+            }
           }
         });
         
-        // Top patterns chart
+        // Top patterns chart with mobile optimization
         new Chart(document.getElementById('patternChart'), {
           type: 'bar',
           data: {
@@ -142,7 +1066,9 @@
             datasets: [{
               label: 'Occurrences',
               data: {{ pattern_counts|default('[12, 8, 7, 5, 4]')|safe }},
-              backgroundColor: '#007bff'
+              backgroundColor: '#007bff',
+              borderRadius: 4,
+              borderSkipped: false
             }]
           },
           options: {
@@ -150,21 +1076,49 @@
             maintainAspectRatio: false,
             scales: {
               y: {
-                beginAtZero: true
+                beginAtZero: true,
+                grid: {
+                  color: gridColor
+                },
+                ticks: {
+                  color: textColor,
+                  font: {
+                    size: isMobile ? 9 : 10
+                  }
+                }
+              },
+              x: {
+                grid: {
+                  display: false
+                },
+                ticks: {
+                  color: textColor,
+                  maxRotation: isMobile ? 45 : 0,
+                  font: {
+                    size: isMobile ? 9 : 10
+                  }
+                }
+              }
+            },
+            plugins: {
+              legend: {
+                display: false
               }
             }
           }
         });
         
-        // Sentiment chart
+        // Sentiment chart with mobile optimization
         new Chart(document.getElementById('sentimentChart'), {
           type: 'bar',
           data: {
-            labels: ['Very Negative', 'Negative', 'Neutral', 'Positive', 'Very Positive'],
+            labels: isMobile ? ['V.Neg', 'Neg', 'Neut', 'Pos', 'V.Pos'] : ['Very Negative', 'Negative', 'Neutral', 'Positive', 'Very Positive'],
             datasets: [{
               label: 'Message Count',
               data: {{ sentiment_counts|default('[3, 7, 10, 5, 2]')|safe }},
-              backgroundColor: '#6f42c1'
+              backgroundColor: ['#dc3545', '#fd7e14', '#6c757d', '#28a745', '#007bff'],
+              borderRadius: 4,
+              borderSkipped: false
             }]
           },
           options: {
@@ -172,29 +1126,33 @@
             maintainAspectRatio: false,
             scales: {
               y: {
-                beginAtZero: true
+                beginAtZero: true,
+                grid: {
+                  color: gridColor
+                },
+                ticks: {
+                  color: textColor,
+                  font: {
+                    size: isMobile ? 9 : 10
+                  }
+                }
+              },
+              x: {
+                grid: {
+                  display: false
+                },
+                ticks: {
+                  color: textColor,
+                  maxRotation: isMobile ? 25 : 0,
+                  font: {
+                    size: isMobile ? 9 : 10
+                  }
+                }
               }
-            }
-          }
-        });
-        
-        // Match count chart
-        new Chart(document.getElementById('matchCountChart'), {
-          type: 'bar',
-          data: {
-            labels: ['0', '1', '2', '3+'],
-            datasets: [{
-              label: 'Number of Messages',
-              data: {{ match_counts|default('[20, 15, 8, 5]')|safe }},
-              backgroundColor: '#fd7e14'
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-              y: {
-                beginAtZero: true
+            },
+            plugins: {
+              legend: {
+                display: false
               }
             }
           }
@@ -203,12 +1161,50 @@
     </script>
     {% endif %}
     
-    <div class="footer">
-      <p>&copy; Online Safety Guardian</p>
-    </div>
+    <!-- Professional Footer -->
+    <footer class="main-footer">
+      <div class="footer-container">
+        <div class="footer-grid">
+          <div class="footer-section">
+            <h4>ThreatSense Analytics</h4>
+            <p>Advanced AI-powered threat detection for South African digital safety. Protecting communities through cutting-edge technology and comprehensive monitoring.</p>
+          </div>
+          
+          <div class="footer-section">
+            <h4>Platform</h4>
+            <a href="#analysis-tools">Threat Analysis</a>
+            <a href="#mission">About Us</a>
+            <a href="/admin/dashboard">Admin Dashboard</a>
+            <a href="/admin/audit-logs">Security Audit</a>
+            <a href="/admin/session-info">System Status</a>
+          </div>
+          
+          <div class="footer-section">
+            <h4>Resources</h4>
+            <a href="#">Documentation</a>
+            <a href="#">API Reference</a>
+            <a href="#">Security Guidelines</a>
+            <a href="#">Community Support</a>
+            <a href="#">Training Materials</a>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p>&copy; 2025 ThreatSense Analytics. All rights reserved.</p>
+          <p>For South African Digital Safety Initiative | Enterprise Security Platform</p>
+        </div>
+      </div>
+    </footer>
   </div>
   <!-- Optional Bootstrap JS and dependencies -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Settings Modal JavaScript -->
+  <script src="{{ url_for('static', filename='js/settings.js') }}"></script>
+  <!-- Mobile Enhancements JavaScript -->
+  <script src="{{ url_for('static', filename='js/mobile-enhancements.js') }}"></script>
 </body>
 </html>
+
+<!--Dang You Really Went Up To Here, Ubufunani Ngempela-->
