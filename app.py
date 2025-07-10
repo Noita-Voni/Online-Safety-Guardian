@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify, flash, render_template_string
 import pandas as pd
 import re
-from colorama import Fore  # Only for console output, not used in web
+# colorama removed - not needed for web deployment
 import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
 import os
@@ -20,7 +20,14 @@ from enum import Enum
 from functools import wraps
 
 # Initialize NLTK and download the lexicon if necessary
-nltk.download('vader_lexicon')
+try:
+    nltk.download('vader_lexicon', quiet=True)
+    nltk.download('punkt', quiet=True)
+    print("NLTK data downloaded successfully")
+except Exception as e:
+    print(f"Warning: Could not download NLTK data: {e}")
+    # Try to continue anyway - NLTK data might already exist
+
 sia = SentimentIntensityAnalyzer()
 
 # Initialize Flask app

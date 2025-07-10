@@ -91,9 +91,11 @@ To safeguard South Africa's digital future by providing communities, schools, an
 ## 🚀 Installation
 
 ### Prerequisites
-- **Python 3.8+**
+- **Python 3.11.x** (recommended for deployment compatibility)
 - **pip** (Python package installer)
 - **Git** (for cloning the repository)
+
+**Note**: Python 3.12+ may have compatibility issues with some dependencies during deployment. Python 3.11.x is recommended for production deployments.
 
 ### Quick Start
 
@@ -165,6 +167,31 @@ To safeguard South Africa's digital future by providing communities, schools, an
 5. **Deploy**: Railway will automatically build and deploy your app
 6. **Access**: Get your live URL (e.g., `https://your-app.railway.app`)
 
+#### Deployment Troubleshooting
+
+**Build Error: "No module named 'distutils'"**
+- This occurs with Python 3.12+. The project now includes:
+  - `runtime.txt` specifying Python 3.11.8 (recommended)
+  - `.python-version` file for version consistency
+  - Updated `requirements.txt` with `setuptools>=68.0.0`
+- **Solution**: Push these new files to your repository and redeploy
+- If Railway ignores `runtime.txt`, manually set Python version in Railway dashboard
+
+**Dependency Installation Issues**
+- Requirements now use `>=` versions for better compatibility
+- `colorama` dependency removed (was causing conflicts)
+- NLTK downloads are now error-handled for deployment environments
+
+**Quick Fix Steps**:
+1. Commit and push the updated files:
+   ```bash
+   git add requirements.txt runtime.txt .python-version app.py
+   git commit -m "Fix Python 3.12 compatibility for deployment"
+   git push origin main
+   ```
+2. Redeploy on Railway - the build should now succeed
+3. If issues persist, try clearing Railway's build cache and redeploying
+
 ### Alternative Free Hosting
 - **Render.com**: Similar to Railway, great Python support
 - **Heroku**: Classic choice with Git deployment
@@ -176,14 +203,17 @@ To safeguard South Africa's digital future by providing communities, schools, an
 The application requires the following Python packages:
 
 ```
-Flask>=2.0.0
-nltk>=3.6
-pandas>=1.3.0
-numpy>=1.21.0
-scikit-learn>=1.0.0
-requests>=2.25.0
-python-dotenv>=0.19.0
+Flask>=2.3.0
+nltk>=3.8.1
+pandas>=2.1.0
+numpy>=1.25.0
+scikit-learn>=1.3.0
+python-dotenv>=1.0.0
+gunicorn>=21.2.0
+setuptools>=68.0.0
 ```
+
+**Note**: Versions use `>=` for compatibility. The `setuptools` package is included to resolve Python 3.12+ compatibility issues.
 
 ## 📖 Usage
 
