@@ -96,7 +96,7 @@
           </div>
           <div class="stat-card">
             <span class="stat-number">100K+</span>
-            <div class="stat-label">Messages Analyzed Daily</div>
+            <div class="stat-label">Messages Analyzed Monthly</div>
           </div>
           <div class="stat-card">
             <span class="stat-number">&lt;2s</span>
@@ -228,14 +228,85 @@
     <div id="analysis-tools">
       <h1>🔍 Threat Analysis Tools</h1>
       <p class="text-center text-muted">Upload your data for comprehensive AI-powered threat detection and analysis</p>
+      
+      <!-- CSV Format Guide -->
+      <div class="csv-format-guide">
+        <div class="format-card">
+          <div class="format-header">
+            <i class="fas fa-info-circle"></i>
+            <h3>Required CSV Format</h3>
+          </div>
+          <div class="format-content">
+            <p>Your CSV file must have exactly two columns: <code>id</code> and <code>message</code></p>
+            
+            <div class="format-example">
+              <h4>Example:</h4>
+              <div class="csv-preview">
+                <div class="csv-header">
+                  <span>id</span>
+                  <span>message</span>
+                </div>
+                <div class="csv-row">
+                  <span>1</span>
+                  <span>"Hey, don't tell your parents about our chat"</span>
+                </div>
+                <div class="csv-row">
+                  <span>2</span>
+                  <span>"You're really mature for a 14-year-old"</span>
+                </div>
+                <div class="csv-row">
+                  <span>3</span>
+                  <span>"Wanna meet alone next week?"</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="format-requirements">
+              <h4>Requirements:</h4>
+              <ul>
+                <li><i class="fas fa-check-circle"></i> Maximum file size: 10MB</li>
+                <li><i class="fas fa-check-circle"></i> CSV format (.csv extension)</li>
+                <li><i class="fas fa-check-circle"></i> Two columns: 'id' and 'message'</li>
+                <li><i class="fas fa-check-circle"></i> UTF-8 encoding recommended</li>
+                <li><i class="fas fa-check-circle"></i> Messages can be in any South African language</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="template-card">
+          <div class="template-header">
+            <i class="fas fa-download"></i>
+            <h3>Need a Template?</h3>
+          </div>
+          <div class="template-content">
+            <p>Download our sample CSV file to see the exact format required:</p>
+            <a href="{{ url_for('static', filename='sample_chats.csv') }}" 
+               class="download-template-btn" 
+               download="sample_chats.csv">
+              <i class="fas fa-file-csv"></i>
+              Download Sample CSV
+            </a>
+            <p class="template-note">
+              <i class="fas fa-lightbulb"></i>
+              This template contains example messages that demonstrate various threat patterns our AI can detect.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
     
     <form action="/" method="post" enctype="multipart/form-data" class="mt-4">
       <div class="form-group">
-        <label for="file">Upload CSV File (Or Optional, defaults to sample_chats.csv to see it in action):</label>
-        <input type="file" name="file" id="file" class="form-control-file">
+        <label for="file">Select CSV File/Use Templete to See TSA in action</label>
+        <input type="file" name="file" id="file" class="form-control-file" accept=".csv">
+        <small class="form-text text-muted">
+          Maximum file size: 10MB. CSV must contain 'id' and 'message' columns.
+        </small>
       </div>
-      <button type="submit" class="btn btn-primary btn-block">🔍 Run Advanced Analysis</button>
+      <button type="submit" class="btn btn-primary btn-block">
+        <i class="fas fa-search"></i> Analyze CSV
+      </button>
     </form>
 
     {% if flagged_html %}
