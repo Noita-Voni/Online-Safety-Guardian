@@ -56,6 +56,15 @@ To safeguard South Africa's digital future by providing communities, schools, an
 - **Risk Assessment**: Color-coded threat levels (Safe, Suspicious, High Risk)
 - **Pattern Tracking**: Monitor trending threats and attack vectors
 - **Audit Trails**: Comprehensive logging for compliance and review
+- **CSV Upload Interface**: Professional file upload with format validation
+
+### 📝 CSV Data Processing
+- **Smart Format Guide**: Interactive guide showing exact CSV format requirements
+- **Sample Template Download**: Downloadable sample CSV file for reference
+- **Format Validation**: Visual examples with proper column structure
+- **Multi-language Support**: Process CSV files with messages in any South African language
+- **Batch Processing**: Handle up to 10MB CSV files with thousands of messages
+- **Error Prevention**: Clear requirements checklist to prevent format errors
 
 ### ⚙️ Professional Configuration
 - **Customizable Settings**: Adjust sensitivity and detection parameters
@@ -69,6 +78,8 @@ To safeguard South Africa's digital future by providing communities, schools, an
 - **Mobile Responsive**: Full functionality on all devices
 - **Accessible Design**: WCAG 2.1 compliant interface
 - **Smooth Animations**: Modern, professional interactions
+- **CSV Upload Interface**: Professional file upload with interactive format guide
+- **Template Downloads**: Sample CSV files for easy data preparation
 
 ## 📱 Screenshots
 
@@ -150,6 +161,8 @@ To safeguard South Africa's digital future by providing communities, schools, an
 
 7. **Access the Application**
    - Open your browser to `http://localhost:5000`
+   - Download sample CSV template from the main dashboard
+   - Upload your own CSV file or use the sample for testing
    - Admin panel: `http://localhost:5000/admin`
    - Settings page: `http://localhost:5000/settings`
 
@@ -217,22 +230,58 @@ setuptools>=68.0.0
 
 ## 📖 Usage
 
+### CSV File Upload & Analysis
+
+ThreatSense Analytics provides a professional CSV upload interface with comprehensive format guidance:
+
+#### 📋 **CSV Format Requirements**
+- **Two columns required**: `id` and `message`
+- **Maximum file size**: 10MB
+- **File format**: .csv extension
+- **Encoding**: UTF-8 recommended
+- **Language support**: All South African languages supported
+
+#### 🔍 **Interactive Format Guide**
+The application features a built-in CSV format guide that shows:
+- **Visual examples** of properly formatted CSV data
+- **Requirements checklist** with clear validation criteria
+- **Sample data preview** showing threat detection examples
+- **Error prevention** tips to avoid common formatting mistakes
+
+#### 📥 **Sample Template Download**
+- **Download sample CSV**: Click the "Download Sample CSV" button
+- **Reference data**: Contains realistic examples of various threat patterns
+- **Format validation**: Use as a template for your own data
+- **Testing purposes**: Perfect for trying out the analysis features
+
+#### 📊 **Upload Process**
+1. **Review format guide**: Check the CSV format requirements
+2. **Download template** (optional): Use sample file as reference
+3. **Prepare your data**: Format according to specifications
+4. **Upload CSV file**: Use the file selector or drag-and-drop
+5. **Analyze results**: View comprehensive threat analysis dashboard
+
 ### Basic Analysis
 
-1. **Submit Content for Analysis**
+1. **Upload CSV Data for Analysis**
    - Navigate to the main dashboard at `http://localhost:5000`
-   - Paste or type content in the analysis text area
-   - Click "Analyze Message" to process
+   - Review the CSV format guide for proper data structure
+   - Download the sample CSV template if needed
+   - Upload your CSV file using the professional upload interface
+   - Click "Analyze CSV" to process your data
 
-2. **Review Results**
-   - View real-time risk assessment with color-coded threat levels
+2. **Review Comprehensive Results**
+   - View real-time risk assessment dashboard with interactive charts
    - Examine detailed threat categories and confidence scores
    - Access sentiment analysis results and pattern detection
+   - Click on threat profile cards for detailed modal views
+   - Export or save analysis results
 
 3. **Explore Interactive Dashboard**
-   - Click on threat profile cards for detailed modal views
    - Navigate through different chart visualizations
-   - View analytics and statistics
+   - Filter results by threat categories and risk levels
+   - View analytics and statistics across your dataset
+   - Access audit trails and processing logs
 
 ### Advanced Features
 
@@ -288,6 +337,34 @@ Prioritize detection for specific South African languages:
 - English, Afrikaans, isiZulu, isiXhosa, Sepedi, Setswana, Sesotho, Xitsonga, siSwati, Tshivenda, isiNdebele
 
 ## 🔌 API Documentation
+
+### CSV Upload Endpoint
+
+**POST** `/` (form-data)
+
+Upload CSV file for batch threat analysis.
+
+**Request:**
+```http
+POST / HTTP/1.1
+Content-Type: multipart/form-data
+
+file: (CSV file with 'id' and 'message' columns)
+```
+
+**CSV Format Requirements:**
+- **Columns**: `id`, `message`
+- **Max size**: 10MB
+- **Encoding**: UTF-8 recommended
+- **Languages**: All South African languages supported
+
+**Response:**
+Returns HTML page with:
+- Interactive threat analysis dashboard
+- Risk distribution charts
+- Detailed threat profiling cards
+- Sentiment analysis results
+- Pattern detection summaries
 
 ### Analysis Endpoint
 
@@ -510,14 +587,16 @@ ThreatSense-Analytics/
 ├── README.md             # This documentation
 ├── static/
 │   ├── styles.css        # Main stylesheet with mobile responsiveness
+│   ├── sample_chats.csv  # Sample CSV template for download
 │   ├── js/
 │   │   ├── mobile-enhancements.js  # Mobile-specific JavaScript
 │   │   └── settings.js   # Settings page functionality
 │   └── images/           # Application images and screenshots
 ├── templates/
-│   ├── index.html        # Main dashboard template
+│   ├── index.html        # Main dashboard with CSV upload interface
 │   └── settings.html     # Settings page template
 ├── audit_logs/           # System audit logs
+├── sample_chats.csv      # Root sample file for development
 └── images/               # Screenshots and demo materials
 ```
 
