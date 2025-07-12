@@ -86,3 +86,10 @@ audit_logs/*.log
 # Sensitive data
 flagged_messages.csv
 analysis.log
+
+# Development and testing files
+linkedin-carousel.md
+*.bak
+*.backup
+test_data/
+demo_data/

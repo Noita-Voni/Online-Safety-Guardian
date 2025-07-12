@@ -2315,7 +2315,6 @@ body.premium-dark-mode {
   box-shadow: 0 4px 16px rgba(0, 123, 255, 0.3);
   position: relative;
   overflow: hidden;
-  width: 100%;
 }
 
 .btn-primary::before {
@@ -2677,62 +2676,56 @@ body.premium-dark-mode {
   font-size: 1rem;
 }
 
-/* Mobile Responsiveness for CSV Guide */
+/* Data Liability Disclaimer */
+.liability-disclaimer {
+  background: rgba(220, 53, 69, 0.1);
+  border: 2px solid rgba(220, 53, 69, 0.3);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  backdrop-filter: blur(10px);
+}
+
+.disclaimer-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.disclaimer-header i {
+  font-size: 1.5rem;
+  color: var(--danger-color);
+  margin-right: 0.75rem;
+}
+
+.disclaimer-header h4 {
+  color: var(--text-primary);
+  margin: 0;
+  font-weight: 600;
+}
+
+.disclaimer-content {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.disclaimer-content p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* Mobile responsive */
 @media (max-width: 768px) {
-  .csv-format-guide {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    margin: 1.5rem 0;
+  .liability-disclaimer {
+    padding: 1rem;
+    margin: 1rem 0;
   }
   
-  .format-card, .template-card {
-    padding: 1.5rem;
-  }
-  
-  .csv-header, .csv-row {
-    font-size: 0.8rem;
-    grid-template-columns: 1fr 2fr;
-    gap: 1rem;
-    padding: 0.5rem;
-  }
-  
-  .format-header h3, .template-header h3 {
+  .disclaimer-header h4 {
     font-size: 1.1rem;
   }
   
-  .download-template-btn {
-    padding: 0.8rem 1.5rem;
+  .disclaimer-content p {
     font-size: 0.9rem;
-  }
-  
-  .format-header i, .template-header i {
-    font-size: 1.2rem;
-    padding: 0.4rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .csv-preview {
-    font-size: 0.8rem;
-    padding: 1rem;
-  }
-  
-  .csv-header, .csv-row {
-    font-size: 0.75rem;
-    gap: 0.5rem;
-    padding: 0.4rem;
-  }
-  
-  .format-requirements li {
-    font-size: 0.85rem;
-  }
-  
-  .format-card, .template-card {
-    padding: 1.2rem;
-  }
-  
-  .download-template-btn {
-    width: 100%;
-    justify-content: center;
   }
 }

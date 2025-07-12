@@ -296,16 +296,27 @@
       </div>
     </div>
     
+    <!-- Data Liability Disclaimer -->
+    <div class="liability-disclaimer">
+      <div class="disclaimer-header">
+        <i class="fas fa-exclamation-triangle"></i>
+        <h4>Data Confidentiality Notice</h4>
+      </div>
+      <div class="disclaimer-content">
+        <p><strong>Important:</strong> By uploading your CSV file, you acknowledge that you are solely responsible for the confidentiality and security of your data. Please ensure you have proper authorization to analyze the data you upload.</p>
+      </div>
+    </div>
+    
     <form action="/" method="post" enctype="multipart/form-data" class="mt-4">
       <div class="form-group">
-        <label for="file">Select CSV File/Use Templete to See TSA in action</label>
+        <label for="file">Select Your CSV File/Use Template to See TSA in action</label>
         <input type="file" name="file" id="file" class="form-control-file" accept=".csv">
         <small class="form-text text-muted">
           Maximum file size: 10MB. CSV must contain 'id' and 'message' columns.
         </small>
       </div>
       <button type="submit" class="btn btn-primary btn-block">
-        <i class="fas fa-search"></i> Analyze CSV
+        <i class="fas fa-search"></i> Analyze CSV/Use Template
       </button>
     </form>
 
