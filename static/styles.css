@@ -2729,3 +2729,66 @@ body.premium-dark-mode {
     font-size: 0.9rem;
   }
 }
+
+/* Mobile responsive for CSV format guide */
+@media (max-width: 768px) {
+  .csv-format-guide {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  
+  .format-card, .template-card {
+    padding: 1.5rem;
+  }
+  
+  .format-header h3, .template-header h3 {
+    font-size: 1.2rem;
+  }
+  
+  .format-header i, .template-header i {
+    font-size: 1.3rem;
+    padding: 0.4rem;
+  }
+  
+  .format-content p, .template-content p {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+  
+  .csv-preview {
+    padding: 1rem;
+    font-size: 0.8rem;
+  }
+  
+  .csv-header, .csv-row {
+    grid-template-columns: 80px 1fr;
+    gap: 1rem;
+  }
+  
+  .format-requirements li {
+    font-size: 0.9rem;
+    padding: 0.4rem 0;
+  }
+  
+  .download-template-btn {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.95rem;
+  }
+  
+  .template-note {
+    font-size: 0.85rem;
+    padding: 0.8rem;
+  }
+}
+
+/* Tablet responsive */
+@media (max-width: 992px) and (min-width: 769px) {
+  .csv-format-guide {
+    gap: 1.5rem;
+  }
+  
+  .format-card, .template-card {
+    padding: 1.75rem;
+  }
+}
